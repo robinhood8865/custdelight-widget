@@ -1,18 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const widget = localStorage.getItem("widget");
-
-const initialState = widget
-  ? JSON.parse(widget).setting
-  : {
-      settingIndex: 0,
-      subDomain: "",
-      customerPortal: "",
-      logoUrl: "logourl",
-      branding: false,
-      senderName: "",
-      senderEmail: "",
-    };
+const initialState = {
+  settingIndex: 0,
+  subDomain: "",
+  customerPortal: "",
+  logoUrl: "logourl",
+  branding: false,
+  senderName: "",
+  senderEmail: "",
+};
 
 const SettingSlice = createSlice({
   name: "Setting",

@@ -1,5 +1,13 @@
 import React from "react";
-
+import pPicture from "./assets/imageP.svg";
+import image4 from "./assets/image4.png";
+import vector from "./assets/Vector.svg";
+import mastercard from "./assets/Mastercard.svg";
+import aExpress from "./assets/American Express.svg";
+import discover from "./assets/Discover.svg";
+import cvcCard from "./assets/CVC Card.svg";
+import stripe from "./assets/stripe.svg";
+import visa from "./assets/Visa.svg";
 const Register = ({ setShowPage }) => {
   return (
     <div className="relative text-user-gray overflow-auto h-[517px] ">
@@ -23,13 +31,13 @@ const Register = ({ setShowPage }) => {
           </div>
 
           <div className="w-[32px] h-[32px] rounded-full">
-            <img src="./assets/imageP.svg" alt="" />
+            <img src={pPicture} alt="" />
           </div>
           <p className="ml-[8px] mr-[80px] text-center text-[14px] leading-[20px] text-[#1A1F36] font-[500]">
             Restaurant ABC
           </p>
           <select
-            className="focus:z-10  text-[12px] bg-white"
+            className="focus:z-30  text-[12px] bg-white"
             id="country"
             name="country"
             autoComplete="country-name"
@@ -41,15 +49,15 @@ const Register = ({ setShowPage }) => {
       </div>
       <div className="relative mt-[28px] ml-[116px] w-[168px] h-[168px] ">
         <div className="w-full h-full flex items-center justify-center ">
-          <img src="./assets/image4.png" alt="" />
+          <img src={image4} alt="" />
         </div>
 
-        <div className="flex items-center justify-center px-[5px] rounded-full shadow-[0_2px_5px_0_rgba(0,0,0,0.08)] bg-white text-[black] text-[12px] font-[500] mt-[-34px] ml-[45px] h-[20px] w-[70px]">
+        <div className="absolute flex items-center justify-center  rounded-full shadow-[0_2px_5px_0_rgba(0,0,0,0.08)] bg-white text-[black] text-[12px] font-[500] mt-[-34px] ml-[50px] h-[20px] w-[70px] ">
           <div>1 item</div>
           <div>
             <img
               className="ml-[10px] py-[5px] text-user-gray"
-              src="./assets/Vector.svg"
+              src={vector}
               alt=""
             />
           </div>
@@ -126,28 +134,20 @@ const Register = ({ setShowPage }) => {
                           />
                           <div className="flex items-center">
                             <div>
-                              <img src="./assets/Vector.svg" alt="" />
+                              <img src={visa} alt="" />
                             </div>
                             <div>
                               <img
                                 className="ml-[8px]"
-                                src="./assets/Mastercard.svg"
+                                src={mastercard}
                                 alt=""
                               />
                             </div>
                             <div>
-                              <img
-                                className="ml-[8px]"
-                                src="./assets/American Express.svg"
-                                alt=""
-                              />
+                              <img className="ml-[8px]" src={aExpress} alt="" />
                             </div>
                             <div>
-                              <img
-                                className="ml-[8px]"
-                                src="./assets/Discover.svg"
-                                alt=""
-                              />
+                              <img className="ml-[8px]" src={discover} alt="" />
                             </div>
                           </div>
                         </div>
@@ -170,7 +170,7 @@ const Register = ({ setShowPage }) => {
                               className="focus:outline-none focus:ring-0 w-full bg-white"
                               placeholder="CVC"
                             />
-                            <img src="./assets/CVC Card.svg" alt="" />
+                            <img src={cvcCard} alt="" />
                           </div>
                         </div>
                       </div>
@@ -209,7 +209,7 @@ const Register = ({ setShowPage }) => {
                             </label>
 
                             <select
-                              className="bg-white focus:outline-none focus:ring-0 relative w-full focus:z-10 text-black text-[16px]"
+                              className="bg-white focus:outline-none focus:ring-0 relative w-full focus:z-30 text-black text-[16px]"
                               id="country"
                               name="country"
                               autoComplete="country-name"
@@ -255,7 +255,7 @@ const Register = ({ setShowPage }) => {
         </div>
         <div className="flex justify-center mt-[64px]">
           <div className="text-[12px] mr-[4px]">powered by</div>
-          <img src="./assets/stripe.svg" alt="" />
+          <img src={stripe} alt="" />
         </div>
         <div className="mt-[8px] mb-[46px] flex justify-center text-[12px]">
           <div className="mr-[20px]">Terms</div>

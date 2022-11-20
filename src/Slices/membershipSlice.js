@@ -1,20 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const widget = localStorage.getItem("widget");
-
-const initialState = widget
-  ? JSON.parse(widget).module.membership
-  : {
-      membershipType: 1,
-      paymentTerm: 1,
-      fees: 99.99,
-      useFirstName: false,
-      useLastName: false,
-      useEmail: false,
-      useMobileNumber: false,
-      cancellation: 1,
-      membershipTerms: "https://www.xxx.com",
-    };
+const initialState = {
+  membershipType: 1,
+  paymentTerm: 1,
+  fees: 99.99,
+  useFirstName: false,
+  useLastName: false,
+  useEmail: false,
+  useMobileNumber: false,
+  cancellation: 1,
+  membershipTerms: "https://www.xxx.com",
+};
 
 const MembershipSlice = createSlice({
   name: "Membership",

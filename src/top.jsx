@@ -1,9 +1,16 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Top = ({ setShowPage }) => {
+  const { headerColor, buttonColor, widgetColor } = useSelector(
+    (state) => state.theme
+  );
   return (
     <div className="relative ">
-      <div className="w-full h-[84px] bg-light-sky rounded-t-md">
+      <div
+        className="w-full h-[84px] bg-light-sky rounded-t-md"
+        style={{ backgroundColor: headerColor }}
+      >
         <div className="flex items-center w-full h-full">
           <div
             onClick={() => {

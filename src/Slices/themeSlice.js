@@ -1,16 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-const widget = localStorage.getItem("widget");
-
-const initialState = widget
-  ? JSON.parse(widget).theme
-  : {
-      styleIndex: 0,
-      headerColor: "#812FBF",
-      buttonColor: "#812FBF",
-      widgetColor: "#812FBF",
-      widgetIcon: "Icon",
-    };
+const initialState = {
+  styleIndex: 0,
+  headerColor: "#812FBF",
+  buttonColor: "#812FBF",
+  widgetColor: "#812FBF",
+  widgetIcon: "custdelight.jpg",
+};
 
 const ThemeSlice = createSlice({
   name: "Theme",

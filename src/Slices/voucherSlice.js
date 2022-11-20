@@ -1,21 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const widget = localStorage.getItem("widget");
-
-const initialState = widget
-  ? JSON.parse(widget).module.voucher
-  : {
-      voucherType: 1,
-      expiryTerm: 1,
-      fees: 99,
-      voucherFirstName: false,
-      voucherLastName: false,
-      voucherEmail: false,
-      voucherMobileNumber: false,
-      redemptionType: false,
-      redemption: 200,
-      voucherTerms: "https://www.xxx.com",
-    };
+const initialState = {
+  vouchers: [],
+  voucherFirstName: false,
+  voucherLastName: false,
+  voucherEmail: false,
+  voucherMobileNumber: false,
+  redemptionType: false,
+  redemption: 200,
+};
 
 const VoucherSlice = createSlice({
   name: "Voucher",

@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./store";
 import { Provider } from "react-redux";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("widgetroot"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -1,9 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Welcome = ({ setShowPage }) => {
+  const { headerColor, buttonColor } = useSelector((state) => state.theme);
+
   return (
     <div className="relative ">
-      <div className="static w-full h-[250px] bg-light-sky rounded-t-md  ">
+      <div
+        className="static w-full h-[250px] bg-light-sky rounded-t-md"
+        style={{ backgroundColor: headerColor }}
+      >
         <div className="absolute top-[25px] left-[25px] text-white font-bold">
           Welcome to
         </div>
@@ -23,13 +29,17 @@ const Welcome = ({ setShowPage }) => {
               setShowPage(1);
             }}
             className="mt-[14px] w-[130px] h-[50px] ml-[110px] rounded-[5px] bg-light-sky text-white"
+            style={{ backgroundColor: buttonColor }}
           >
             <p className="text-[16px] font-bold">Join now</p>
           </button>
           <p className="mt-[7px]  text-center left-[94px] text-[16px]  text-user-gray">
             Already have an account?
           </p>
-          <button className="mb-[17px] ml-[147px] text-light-sky underline ">
+          <button
+            className="mb-[17px] ml-[147px] text-light-sky underline"
+            style={{ color: buttonColor }}
+          >
             Sign in
           </button>
         </div>
@@ -47,6 +57,7 @@ const Welcome = ({ setShowPage }) => {
             setShowPage(2);
           }}
           className="mt-[14px] w-[130px] h-[50px] ml-[110px] rounded-[5px] bg-light-sky"
+          style={{ backgroundColor: buttonColor }}
         >
           <p className="text-[16px] text-white font-bold">Browse</p>
         </button>

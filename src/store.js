@@ -4,13 +4,14 @@ import voucherReducer from "./Slices/voucherSlice";
 import moduleReducer from "./Slices/moduleSlice";
 import themeReducer from "./Slices/themeSlice";
 import settingReducer from "./Slices/settingSlice";
-
+import widgetReducer from "./Slices/widgetSlice";
 const reducer = {
   membership: membershipReducer,
   voucher: voucherReducer,
   module: moduleReducer,
   theme: themeReducer,
   setting: settingReducer,
+  widget: widgetReducer,
 };
 
 const store = configureStore({

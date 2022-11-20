@@ -11,6 +11,8 @@ const ModuleSlice = createSlice({
   name: "Module",
   initialState,
   reducers: {
+    setModuleConfigration: (state, action) => action.payload,
+
     setMemberShip: (state, action) => {
       state.visibleMemberShip = action.payload;
     },
@@ -28,6 +30,11 @@ const ModuleSlice = createSlice({
 
 const { reducer, actions } = ModuleSlice;
 
-export const { setMemberShip, setVouchers, setPayment, setModuleIndex } =
-  actions;
+export const {
+  setModuleConfigration,
+  setMemberShip,
+  setVouchers,
+  setPayment,
+  setModuleIndex,
+} = actions;
 export default reducer;

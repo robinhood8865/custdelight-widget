@@ -16,7 +16,7 @@ const Layout = ({ setShowWidget }) => {
           onClick={() => {
             setShowWidget(false);
           }}
-          className="cursor-pointer z-10 absolute top-[15px] h-[20px] w-[20px] right-[15px] rounded-full bg-black p-[2.2px] opacity-50"
+          className="cursor-pointer z-30 absolute top-[15px] h-[20px] w-[20px] right-[15px] rounded-full bg-black p-[2.2px] opacity-50"
         >
           <svg
             className="text-white h-4 w-4 "
