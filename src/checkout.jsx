@@ -8,9 +8,28 @@ import discover from "./assets/Discover.svg";
 import cvcCard from "./assets/CVC Card.svg";
 import stripe from "./assets/stripe.svg";
 import visa from "./assets/Visa.svg";
-const Register = ({ setShowPage }) => {
+import { useSelector } from "react-redux";
+
+const Checkout = ({ setShowPage }) => {
+  const { headerColor, buttonColor } = useSelector((state) => state.theme);
+  const voucher = useSelector((state) => state.voucher);
+  const { vouchers, voucherFirstName, voucherLastName } = voucher;
+  const widget = useSelector((state) => state.widget);
+  const { voucherCount, totalPrice } = widget;
+
+  var m_total = 0;
+  const vouchersNum = vouchers.length;
+
+  for (let i = 0; i < vouchersNum; i++) {
+    if (vouchers[i].voucherType !== 1) {
+      if (vouchers[i].voucherDiscountedPrice === 0)
+        m_total += vouchers[i].voucherUsualPrice * voucherCount[i];
+      else m_total += vouchers[i].voucherDiscountedPrice * voucherCount[i];
+    }
+  }
+
   return (
-    <div className="relative text-user-gray overflow-auto h-[517px] ">
+    <div className="relative text-user-gray overflow-auto h-[848px] ">
       <div className="w-[327px] h-[32px] mt-[31px] ml-[36px] flex justify-between">
         <div className="flex items-center">
           <div className="w-[32px] h-[32px] rounded-full  p-[8px]">
@@ -47,28 +66,7 @@ const Register = ({ setShowPage }) => {
         </div>
         <div className="font=[12px] leading-[20px] text-user-gray"></div>
       </div>
-      <div className="relative mt-[28px] ml-[116px] w-[168px] h-[168px] ">
-        <div className="w-full h-full flex items-center justify-center ">
-          <img src={image4} alt="" />
-        </div>
 
-        <div className="absolute flex items-center justify-center  rounded-full shadow-[0_2px_5px_0_rgba(0,0,0,0.08)] bg-white text-[black] text-[12px] font-[500] mt-[-34px] ml-[50px] h-[20px] w-[70px] ">
-          <div>1 item</div>
-          <div>
-            <img
-              className="ml-[10px] py-[5px] text-user-gray"
-              src={vector}
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
-      <p className="text-[16px] leading-[24px] mt-[8px] ml-[130px] font-[500]">
-        Pay Restaurant ABC
-      </p>
-      <div className="w-[146px] h-[44px] mt-[8px] ml-[127px] text-[36px] leading-[44px] font-[600] text-[#1A1F36]">
-        <p>$ 100.00</p>
-      </div>
       <div className="mt-[32px] ml-[36px] w-[327px] ">
         <div>
           <h1 className="sr-only">Checkout</h1>
@@ -77,30 +75,6 @@ const Register = ({ setShowPage }) => {
             <div className="">
               <div className="max-w-lg ">
                 <form className="grid grid-cols-6">
-                  <div className="col-span-6">
-                    <button className="w-full h-[48px] py-[12px] px-[134px] bg-black rounded-[4px] shadow-[0_1px_1px_0_rgba(0,0,0,0.08)]">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="59"
-                        height="24"
-                        viewBox="0 0 59 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M11.0398 3.0942C10.3577 3.90485 9.26648 4.54424 8.17523 4.4529C8.03882 3.3568 8.57308 2.1922 9.19827 1.47288C9.88031 0.639391 11.0739 0.0456708 12.0401 0C12.1537 1.14177 11.7104 2.2607 11.0398 3.0942ZM12.0287 4.66984C10.4487 4.5785 9.09597 5.57184 8.34573 5.57184C7.58413 5.57184 6.43605 4.71551 5.18566 4.73834C3.56015 4.76118 2.04831 5.68601 1.21851 7.1589C-0.48657 10.1047 0.775188 14.4662 2.42343 16.8639C3.2305 18.0514 4.19671 19.353 5.46984 19.3073C6.67476 19.2617 7.15218 18.5195 8.60718 18.5195C10.0735 18.5195 10.4941 19.3073 11.7673 19.2845C13.0859 19.2617 13.9157 18.0971 14.7227 16.9096C15.6435 15.5623 16.0186 14.2493 16.0413 14.1808C16.0186 14.1579 13.4951 13.1874 13.4723 10.2645C13.4496 7.82112 15.4616 6.65652 15.5525 6.58801C14.4158 4.89819 12.6425 4.71551 12.0287 4.66984ZM21.1566 1.35871V19.1589H23.9074V13.0733H27.7154C31.1938 13.0733 33.6377 10.6755 33.6377 7.20457C33.6377 3.73359 31.2393 1.35871 27.8064 1.35871H21.1566ZM23.9074 3.68792H27.0789C29.466 3.68792 30.83 4.9667 30.83 7.21598C30.83 9.46527 29.466 10.7555 27.0675 10.7555H23.9074V3.68792ZM38.662 19.2959C40.3898 19.2959 41.9926 18.4167 42.7201 17.0238H42.7769V19.1589H45.3232V10.2988C45.3232 7.72978 43.2771 6.07421 40.1284 6.07421C37.207 6.07421 35.0473 7.75262 34.9677 10.059H37.4457C37.6503 8.96289 38.662 8.24358 40.0488 8.24358C41.7312 8.24358 42.6746 9.0314 42.6746 10.4814V11.4634L39.2417 11.6689C36.0476 11.863 34.3198 13.176 34.3198 15.4596C34.3198 17.7659 36.1044 19.2959 38.662 19.2959ZM39.4009 17.1836C37.9345 17.1836 37.0024 16.4757 37.0024 15.3911C37.0024 14.2721 37.9004 13.6213 39.6169 13.5186L42.6746 13.3245V14.3292C42.6746 15.9962 41.2651 17.1836 39.4009 17.1836ZM48.722 24C51.4046 24 52.6664 22.9724 53.769 19.8554L58.6001 6.24548H55.8037L52.5641 16.7612H52.5073L49.2676 6.24548H46.3917L51.0523 19.2046L50.8022 19.9924C50.3816 21.3283 49.6996 21.8421 48.4833 21.8421C48.2673 21.8421 47.8467 21.8192 47.6762 21.7964V23.9315C47.8353 23.9772 48.5174 24 48.722 24Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="mt-[32px] col-span-6">
-                    <div className="flex items-center">
-                      <div className="h-[0.5px] w-[108px] bg-user-gray"> </div>
-                      <div className="">Or pay with card</div>
-                      <div className="h-[0.5px] w-[108px] bg-user-gray"> </div>
-                    </div>
-                  </div>
-
                   <div className="col-span-6 mt-[32px]">
                     <label
                       className="block mb-[8px] text-[14px] font-[600] text-gray-600 "
@@ -241,29 +215,33 @@ const Register = ({ setShowPage }) => {
                   </div>
 
                   <div className="col-span-6 mt-[32px]">
-                    <button
-                      className="w-full h-[48px] py-[12px] bg-[#3C4257] rounded-[4px] shadow-[0_1px_1px_0_rgba(0,0,0,0.08)] "
+                    <div
+                      onClick={() => {
+                        setShowPage(4);
+                      }}
+                      className="cursor-pointer text-[18px] font-[500] flex justify-center w-full h-[48px] py-[12px] text-white rounded-[4px] shadow-[0_1px_1px_0_rgba(0,0,0,0.08)] "
                       // type="submit"
+                      style={{ background: buttonColor }}
                     >
-                      Pay $100.00
-                    </button>
+                      Pay ${m_total}
+                    </div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-center mt-[64px]">
+        {/* <div className="flex justify-center mt-[64px]">
           <div className="text-[12px] mr-[4px]">powered by</div>
           <img src={stripe} alt="" />
         </div>
         <div className="mt-[8px] mb-[46px] flex justify-center text-[12px]">
           <div className="mr-[20px]">Terms</div>
           <div className="">Privacy </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default Register;
+export default Checkout;

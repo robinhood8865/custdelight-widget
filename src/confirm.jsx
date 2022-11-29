@@ -1,11 +1,12 @@
 import React from "react";
+import check_blue from "./assets/check_blue.svg";
 
 const Confirm = ({ setShowPage }) => {
   return (
     <div className="relative ">
       <div className="w-[118px] h-[118px] mt-[57px] mb-[35px] ml-[147px] ">
         <div className=" ">
-          <img src="./assets/check_blue.svg" alt="An SVG of an eye" />
+          <img src={check_blue} alt="An SVG of an eye" />
         </div>
       </div>
       <div className="w-[340px] h-[90px] ml-[34px]">

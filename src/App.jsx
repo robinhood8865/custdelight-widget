@@ -9,8 +9,10 @@ import { setModuleConfigration } from "./Slices/moduleSlice";
 import { setSettingConfigration } from "./Slices/settingSlice";
 import { setThemeConfigration } from "./Slices/themeSlice";
 import { setVoucherConfigration } from "./Slices/voucherSlice";
+import { setVoucherCount } from "./Slices/widgetSlice";
 
-const API_URL = "https://custdelightbackend-production-09c5.up.railway.app/api";
+const API_URL = process.env.REACT_APP_BACKEND_API;
+// const API_URL = "http://localhost:5000/api";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,6 +42,21 @@ const App = () => {
 
     const moduleData = getTemplatedData(moudleTemp);
     dispatch(setModuleConfigration(moduleData));
+
+    const voucherNums = voucherData.vouchers.length;
+    console.log(
+      "🚀 ~ file: App.jsx ~ line 45 ~ setAllData ~ voucherNums",
+      voucherNums
+    );
+    var voucherCount = [];
+    for (let i = 0; i < voucherNums; i++) {
+      voucherCount[i] = 0;
+    }
+    console.log(
+      "🚀 ~ file: App.jsx ~ line 50 ~ setAllData ~ voucherCount",
+      voucherCount
+    );
+    dispatch(setVoucherCount(voucherCount));
   };
   useEffect(() => {
     const fetchData = async () => {

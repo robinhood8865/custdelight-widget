@@ -5,13 +5,24 @@ import Top from "./top";
 import BuyVouchers from "./buyVouchers";
 import Confirm from "./confirm";
 import Checkout from "./checkout";
+import VoucherDetail from "./voucherDetail";
+import Summary from "./summary";
+import Account from "./account";
+import Login from "./login";
+import { Toaster } from "react-hot-toast";
 
 const Layout = ({ setShowWidget }) => {
   const [showPage, setShowPage] = useState(0);
+  const [currentVoucher, setCurrentVoucher] = useState(-1);
 
   return (
     <div>
-      <div className="w-[400px] h-[601px] bg-white rounded-md shadow-[0_20px_30px_0_rgba(28,040,50,0.2)] tracking-[-0.5px]">
+      <Toaster position="bottom-right" containerStyle={{ fontSize: 12 }} />
+      <div
+        className={`${
+          showPage < 5 ? "h-[601px]" : "h-[798px]"
+        } w-[400px]  bg-white rounded-md shadow-[0_20px_30px_0_rgba(28,040,50,0.2)] tracking-[-0.5px]`}
+      >
         <div
           onClick={() => {
             setShowWidget(false);
@@ -34,7 +45,7 @@ const Layout = ({ setShowWidget }) => {
             />
           </svg>
         </div>
-        {showPage === 0 && (
+        {showPage === 0 && ( // welcome page
           <Welcome
             className="transition
             duration-150
@@ -42,28 +53,59 @@ const Layout = ({ setShowWidget }) => {
             setShowPage={setShowPage}
           />
         )}
-        {showPage === 1 && (
+        {showPage === 1 && ( //Account page
           <>
-            <Top setShowPage={setShowPage} />
+            <Top setShowPage={setShowPage} showPage={showPage} />
+            <Account setShowPage={setShowPage} />
+          </>
+        )}
+
+        {showPage === 2 && ( // register
+          <>
+            <Top setShowPage={setShowPage} showPage={showPage} />
             <Register setShowPage={setShowPage} />
           </>
         )}
-        {showPage === 2 && (
+        {showPage === 3 && ( // login
           <>
-            <Top setShowPage={setShowPage} />
-            <BuyVouchers setShowPage={setShowPage} />
+            <Top setShowPage={setShowPage} showPage={showPage} />
+            <Login setShowPage={setShowPage} />
           </>
         )}
-        {showPage === 3 && (
+        {showPage === 4 && ( // confirm
           <>
-            <Top setShowPage={setShowPage} />
-            <Checkout setShowPage={setShowPage} />
-          </>
-        )}
-        {showPage === 4 && (
-          <>
-            <Top setShowPage={setShowPage} />
+            <Top setShowPage={setShowPage} showPage={showPage} />
             <Confirm setShowPage={setShowPage} />
+          </>
+        )}
+        {showPage === 5 && ( // Buy Vouchers page
+          <>
+            <Top setShowPage={setShowPage} showPage={showPage} />
+            <BuyVouchers
+              setShowPage={setShowPage}
+              setCurrentVoucher={setCurrentVoucher}
+            />
+          </>
+        )}
+        {showPage === 6 && ( // Voucher Details page
+          <>
+            <Top setShowPage={setShowPage} showPage={showPage} />
+            <VoucherDetail
+              setShowPage={setShowPage}
+              currentVoucher={currentVoucher}
+            />
+          </>
+        )}
+        {showPage === 7 && ( // Summary
+          <>
+            <Top setShowPage={setShowPage} showPage={showPage} />
+            <Summary setShowPage={setShowPage} />
+          </>
+        )}
+        {showPage === 8 && ( // Checkout
+          <>
+            <Top setShowPage={setShowPage} showPage={showPage} />
+            <Checkout setShowPage={setShowPage} />
           </>
         )}
       </div>

@@ -37,6 +37,9 @@ const Welcome = ({ setShowPage }) => {
             Already have an account?
           </p>
           <button
+            onClick={() => {
+              setShowPage(3);
+            }}
             className="mb-[17px] ml-[147px] text-light-sky underline"
             style={{ color: buttonColor }}
           >
@@ -54,7 +57,7 @@ const Welcome = ({ setShowPage }) => {
         </p>
         <button
           onClick={() => {
-            setShowPage(2);
+            setShowPage(5);
           }}
           className="mt-[14px] w-[130px] h-[50px] ml-[110px] rounded-[5px] bg-light-sky"
           style={{ backgroundColor: buttonColor }}

@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Top = ({ setShowPage }) => {
+const Top = ({ setShowPage, showPage }) => {
   const { headerColor, buttonColor, widgetColor } = useSelector(
     (state) => state.theme
   );
+
   return (
     <div className="relative ">
       <div
@@ -14,7 +15,35 @@ const Top = ({ setShowPage }) => {
         <div className="flex items-center w-full h-full">
           <div
             onClick={() => {
-              setShowPage(0);
+              switch (showPage) {
+                case 1:
+                  setShowPage(0);
+                  break;
+                case 2:
+                  setShowPage(1);
+                  break;
+                case 3:
+                  setShowPage(1);
+                  break;
+                case 4:
+                  setShowPage(0);
+                  break;
+                case 5:
+                  setShowPage(0);
+                  break;
+                case 6:
+                  setShowPage(5);
+                  break;
+                case 7:
+                  setShowPage(5);
+                  break;
+                case 8:
+                  setShowPage(7);
+                  break;
+
+                default:
+                  break;
+              }
             }}
             className="ml-[32px] mr-[24px] p-[5px] w-6 h-6 rounded-full cursor-pointer "
           >

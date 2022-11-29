@@ -1,49 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  vouchers: [],
-  voucherFirstName: false,
-  voucherLastName: false,
-  voucherEmail: false,
-  voucherMobileNumber: false,
-  redemptionType: false,
-  redemption: 200,
+  voucherCount: [],
+  totalPrice: 0,
 };
 
 const WidgetSlice = createSlice({
-  name: "Voucher",
+  name: "Widget",
   initialState,
   reducers: {
-    setVoucherConfigration: (state, action) => action.payload,
-    setVoucherType: (state, action) => {
-      state.voucherType = action.payload;
+    setVoucherByIndex: (state, action) => {
+      const { voucherIndex, count } = action.payload;
+      state.voucherCount[voucherIndex] = count;
     },
-    setExpiryTerm: (state, action) => {
-      state.expiryTerm = action.payload;
+    setVoucherCount: (state, action) => {
+      state.voucherCount = action.payload;
     },
-    setFees: (state, action) => {
-      state.fees = action.payload;
+    setTotalPrice: (state, action) => {
+      state.totalPrice = action.payload;
     },
-    setVoucherFirstName: (state, action) => {
-      state.voucherFirstName = action.payload;
-    },
-    setVoucherLastName: (state, action) => {
-      state.voucherLastName = action.payload;
-    },
-    setVoucherEmail: (state, action) => {
-      state.voucherEmail = action.payload;
-    },
-    setVoucherMobileNumber: (state, action) => {
-      state.voucherMobileNumber = action.payload;
-    },
-    setRedemptionType: (state, action) => {
-      state.redemptionType = action.payload;
-    },
-    setRedemption: (state, action) => {
-      state.redemption = action.payload;
-    },
-    setVoucherTerms: (state, action) => {
-      state.voucherTerms = action.payload;
+    addTotalPrice: (state, action) => {
+      state.totalPrice += action.payload;
     },
   },
 });
@@ -51,16 +28,9 @@ const WidgetSlice = createSlice({
 const { reducer, actions } = WidgetSlice;
 
 export const {
-  setVoucherType,
-  setExpiryTerm,
-  setFees,
-  setVoucherFirstName,
-  setVoucherLastName,
-  setVoucherEmail,
-  setVoucherMobileNumber,
-  setRedemptionType,
-  setRedemption,
-  setVoucherTerms,
-  setVoucherConfigration,
+  setVoucherCount,
+  setVoucherByIndex,
+  setTotalPrice,
+  addTotalPrice,
 } = actions;
 export default reducer;

@@ -2,105 +2,62 @@ import React from "react";
 import { useState } from "react";
 import { Input, Checkbox, Button } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
+import axios from "axios";
 import toast from "react-hot-toast";
 
-import axios from "axios";
+// const SERVER_URL = "https://custdelight-3du3.onrender.com";
+// const API_URL = SERVER_URL + "/api/";
+
 const SERVER_URL = process.env.REACT_APP_BACKEND_API;
 const API_URL = SERVER_URL + "/airtableApi";
 
-const Register = ({ setShowPage }) => {
+const Login = ({ setShowPage }) => {
   const [show, setShow] = useState(false);
-  const [agree, setAgree] = useState(false);
-  const { headerColor, buttonColor } = useSelector((state) => state.theme);
+  const { buttonColor } = useSelector((state) => state.theme);
 
-  const handleRegister = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const email = event.target.email.value;
-    const firstname = event.target.firstname.value;
-    const lastname = event.target.lastname.value;
     const password = event.target.password.value;
 
-    console.log(email, firstname, lastname, password);
-    if (email === "") {
-      toast.error("Email required");
-      return;
-    }
-    if (firstname === "") {
-      toast.error("Firstname required");
-      return;
-    }
-    if (lastname === "") {
-      toast.error("Lastname required");
-      return;
-    }
-
-    if (password === "") {
-      toast.error("Password required");
-      return;
-    }
-    console.log("pass", email, firstname, lastname, password);
+    if (email === "") return;
+    if (password === "") return;
 
     axios
-      .post(API_URL + "/signup", {
-        firstname,
-        lastname,
+      .post(API_URL + "/login", {
         email,
         password,
       })
       .then(
         (response) => {
           toast.success(response.data.msg);
-          setShowPage(3);
+          return response.data.user;
         },
         (error) => {
           console.log(error.response.data.msg);
           const resMessage = error.response.data.msg;
-          console.log(
-            "🚀 ~ file: SignIn.tsx ~ line 78 ~ handleSubmit ~ resMessage",
-            resMessage
-          );
           toast.error(resMessage);
         }
       );
   };
-
   return (
     <div className="relative ">
       <div className="w-[340px] h-[30px] mt-[18px] ml-[28px]">
         <p className="mt-[18px] text-center left-[94px] text-[22px] leading-[30px] text-black font-bold">
-          Register
+          Login
         </p>
       </div>
 
-      <div className="w-[363px] h-[351] p-[17px] pt-[20px] rounded-md  bg-white ml-[19px] mt-[12px] shadow-[0_1px_4px_0_rgba(0,0,0,0.25)] ">
-        <form onSubmit={handleRegister}>
-          <div className="mb-[24px]">
+      <div className="w-[363px] h-[241px] pt-[27px] px-[19px]  rounded-md  bg-white ml-[19px] mt-[12px] shadow-[0_1px_4px_0_rgba(0,0,0,0.25)] ">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-[27px]">
             <Input
               name="email"
               size="lg"
-              className="font-inter text-user-text h-[48px] w-full text- text-[14px]  font-[500]"
-              label="Email"
+              className="font-inter text-user-text h-[48px] text-[14px]  font-[500] "
+              label="Email address"
             />
-          </div>
-          <div className="mb-[24px] flex w-full flex-auto">
-            <div className="mr-[15px] [&>div]:min-w-[100px]">
-              <Input
-                name="firstname"
-                size="lg"
-                className="font-inter text-user-text h-[48px] w-full text- text-[14px]  font-[500]"
-                label="First name"
-              />
-            </div>
-
-            <div className="min-w-[100px] [&>div]:min-w-[100px]">
-              <Input
-                name="lastname"
-                size="lg"
-                className="font-inter text-user-text h-[48px] text-[14px]  font-[500] "
-                label="Last name"
-              />
-            </div>
           </div>
           <div className="relative">
             <Input
@@ -119,7 +76,7 @@ const Register = ({ setShowPage }) => {
             >
               {!show && (
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns="http://www.w3.orgs/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="3"
@@ -155,34 +112,21 @@ const Register = ({ setShowPage }) => {
                 </svg>
               )}
 
-              {!show && <i className="fa fa-light fa-eye"></i>}
-              {show && <i className="fa fa-light fa-eye-slash"></i>}
+              {/* {!show && <i className="fa fa-light fa-eye"></i>}
+          {show && <i className="fa fa-light fa-eye-slash"></i>} */}
             </div>
           </div>
-          <Button
-            onClick={() => {}}
-            disabled={!agree}
-            className="mt-[24px] rounded-[6px] w-full h-[48px] bg-user-main"
-            style={{ background: buttonColor }}
-            type="submit"
-          >
-            <p className="font-[700] normal-case text-[14px] leading-[17px]">
-              Sign up
-            </p>
-          </Button>
-
-          <div className="flex justify-between mt-[18px]">
-            <Checkbox
-              onClick={() => {
-                setAgree(!agree);
-              }}
-              name="checkAgree"
-              className="checked:bg-[#009580]  checked:border-[#009580] checked:before:[bg-#009580]"
-            />
-            <div className="text-[12px] font-[400] text-user-text-disable mt-[6px]">
-              By clicking Create account, I agree that I have read and accepted
-              the Terms of Use and Privacy Policy.
+          <div className="flex justify-between items-center mt-[27px]">
+            <div className="hover:cursor-pointer w-1/3 text-[14px] font-[400] text-user-text">
+              Forgot password?
             </div>
+            <button
+              type="submit"
+              className="rounded-[6px] w-[164px] h-[48px] bg-user-main text-center font-[700] normal-case text-[14px] text-white leading-[17px] p-[13px]"
+              style={{ background: buttonColor }}
+            >
+              Sign In
+            </button>
           </div>
         </form>
       </div>
@@ -190,4 +134,4 @@ const Register = ({ setShowPage }) => {
   );
 };
 
-export default Register;
+export default Login;
