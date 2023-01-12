@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { setTotalPrice } from "./Slices/widgetSlice";
-import Voucher from "./voucher";
+import Voucher from "./Voucher";
 import { setVoucherByIndex, addTotalPrice } from "./Slices/widgetSlice";
 const expiryOptions = [
   "7 Days",
@@ -44,7 +44,7 @@ const VoucherDetail = (props) => {
       </div>
       <div
         className={
-          "relative w-[325px] h-[613px] mt-[20px] pt-[29px] px-[21px] ml-[37px] rounded-[16px] text-black bg-white  shadow-[0_20px_30px_0_rgba(16,14,35,0.06)] "
+          "relative w-[325px] h-[416px] mt-[20px] pt-[29px] px-[21px] ml-[37px] rounded-[16px] text-black bg-white  shadow-[0_20px_30px_0_rgba(16,14,35,0.06)] "
         }
       >
         <div className=" text-[48px] leading-[56.25px] font-bold text-[#054169] ">
@@ -97,7 +97,7 @@ const VoucherDetail = (props) => {
           {/* {voucherType === 1 ? "" : expiryOptions[voucherExpiryTerm - 1]} */}
         </div>
         <div className="mt-[37px] font-[600] text-[12px]">Terms</div>
-        <div className="font-[300] text-[12] h-[340px] italic overflow-auto">
+        <div className="font-[300] text-[12] h-[143px] italic overflow-auto">
           Christmas Voucher 3 Course Meal with Wine Pairing Expiry: 3 Months
           Terms Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
@@ -117,6 +117,7 @@ const VoucherDetail = (props) => {
             setShowPage(5);
           }}
           className="absolute cursor-pointer left-0 bottom-0 rounded-b-[16px] h-[43px] w-full bg-[#198DDB] text-white flex items-center justify-center text-[16px] font-bold"
+          style={{ background: buttonColor }}
         >
           Checkout
         </div>

@@ -21,8 +21,15 @@ const Login = ({ setShowPage }) => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    if (email === "") return;
-    if (password === "") return;
+    if (email === "") {
+      toast.error("required email");
+      return;
+    }
+
+    if (password === "") {
+      toast.error("required password");
+      return;
+    }
 
     axios
       .post(API_URL + "/login", {

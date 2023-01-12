@@ -5,6 +5,7 @@ import moduleReducer from "./Slices/moduleSlice";
 import themeReducer from "./Slices/themeSlice";
 import settingReducer from "./Slices/settingSlice";
 import widgetReducer from "./Slices/widgetSlice";
+import integrationReducer from "./Slices/integrationSlice";
 const reducer = {
   membership: membershipReducer,
   voucher: voucherReducer,
@@ -12,6 +13,7 @@ const reducer = {
   theme: themeReducer,
   setting: settingReducer,
   widget: widgetReducer,
+  integration: integrationReducer,
 };
 
 const store = configureStore({

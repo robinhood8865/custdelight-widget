@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { setTotalPrice } from "./Slices/widgetSlice";
-import Voucher from "./voucher";
+import Voucher from "./Voucher";
 
 const BuyVouchers = (props) => {
   const { setShowPage, setCurrentVoucher } = props;
@@ -31,7 +31,7 @@ const BuyVouchers = (props) => {
           Buy Vouchers
         </p>
       </div>
-      <div className="pb-[20px] w-[400px] h-[530px] overflow-y-auto">
+      <div className="pb-[20px] w-[400px] h-[333px] overflow-y-auto">
         {vouchers.map((voucher, index) => (
           <div className="cursor-pointer">
             <Voucher

@@ -1,27 +1,27 @@
 import React, { useState } from "react";
-import Welcome from "./welcome";
-import Register from "./register";
-import Top from "./top";
-import BuyVouchers from "./buyVouchers";
-import Confirm from "./confirm";
-import Checkout from "./checkout";
-import VoucherDetail from "./voucherDetail";
-import Summary from "./summary";
+import Welcome from "./Welcome";
+import Register from "./Register";
+import Top from "./Top";
+import BuyVouchers from "./BuyVouchers";
+import Confirm from "./Confirm";
+import Checkout from "./Checkout";
+import VoucherDetail from "./VoucherDetail";
+import Summary from "./Summary";
 import Account from "./account";
-import Login from "./login";
+import Login from "./Login";
 import { Toaster } from "react-hot-toast";
+import { Elements } from "@stripe/react-stripe-js";
 
-const Layout = ({ setShowWidget }) => {
-  const [showPage, setShowPage] = useState(0);
+const Layout = ({ setShowWidget, showPage, setShowPage }) => {
   const [currentVoucher, setCurrentVoucher] = useState(-1);
 
   return (
     <div>
       <Toaster position="bottom-right" containerStyle={{ fontSize: 12 }} />
       <div
-        className={`${
-          showPage < 5 ? "h-[601px]" : "h-[798px]"
-        } w-[400px]  bg-white rounded-md shadow-[0_20px_30px_0_rgba(28,040,50,0.2)] tracking-[-0.5px]`}
+        // className={`${showPage < 5 ? "h-[601px]" : "h-[798px]"}
+        //    w-[400px]  bg-white rounded-md shadow-[0_20px_30px_0_rgba(28,040,50,0.2)] tracking-[-0.5px]`}
+        className="h-[601px] w-[400px]  bg-white rounded-md shadow-[0_20px_30px_0_rgba(28,040,50,0.2)] tracking-[-0.5px]"
       >
         <div
           onClick={() => {
@@ -105,7 +105,8 @@ const Layout = ({ setShowWidget }) => {
         {showPage === 8 && ( // Checkout
           <>
             <Top setShowPage={setShowPage} showPage={showPage} />
-            <Checkout setShowPage={setShowPage} />
+
+            <Checkout setShowPage={setShowPage} setShowWidget={setShowWidget} />
           </>
         )}
       </div>

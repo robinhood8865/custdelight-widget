@@ -2,17 +2,24 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "./assets/custdelight-white-low-icon-low.png";
+import { loadStripe } from "@stripe/stripe-js";
 
-import Layout from "./layout";
+import Layout from "./Layout";
 import { setMemebershipConfigration } from "./Slices/membershipSlice";
 import { setModuleConfigration } from "./Slices/moduleSlice";
 import { setSettingConfigration } from "./Slices/settingSlice";
 import { setThemeConfigration } from "./Slices/themeSlice";
 import { setVoucherConfigration } from "./Slices/voucherSlice";
 import { setVoucherCount } from "./Slices/widgetSlice";
+import { Elements } from "@stripe/react-stripe-js";
+import { setIntegrationConfigration } from "./Slices/integrationSlice";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_BACKEND_API;
-// const API_URL = "http://localhost:5000/api";
+
+const succeed = new URLSearchParams(window.location.search).get(
+  "redirect_status"
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,12 +27,45 @@ const App = () => {
 
   const { widgetColor } = useSelector((state) => state.theme);
   const [showWidget, setShowWidget] = useState(false);
+  const [showPage, setShowPage] = useState(0);
   const [visibleWidget, setVisibleWidget] = useState(false);
+  // const [succeed, setSucceed] = useState("");
   const getTemplatedData = (data) => {
     const { id, _id, __v, membershipId, voucherId, ...temp } = data;
     return temp;
   };
+
+  console.log("🚀 ~ file: App.jsx:41 ~ App ~ succeed", succeed);
+
+  console.log(
+    "window.location.href",
+    window.location.origin + window.location.pathname
+  );
+  if (localStorage.getItem("showWidget") && localStorage.getItem("showPage")) {
+    setShowWidget(localStorage.getItem("showWidget"));
+    setShowPage(parseInt(localStorage.getItem("showPage")));
+    localStorage.removeItem("showPage");
+    localStorage.removeItem("showWidget");
+  }
+
+  useEffect(() => {
+    if (succeed) {
+      localStorage.setItem("showWidget", true);
+      localStorage.setItem("showPage", 4);
+      window.location.replace(
+        window.location.origin + window.location.pathname
+      );
+      // setShowWidget(true);
+      // setShowPage(4);
+    }
+  }, [succeed]);
+
+  console.log("🚀 ~ file: App.jsx:39 ~ App ~ succeed", succeed);
+
   const setAllData = (data) => {
+    const integrationData = getTemplatedData(data.integration);
+    dispatch(setIntegrationConfigration(integrationData));
+
     const settingData = getTemplatedData(data.setting);
     dispatch(setSettingConfigration(settingData));
 
@@ -105,7 +145,11 @@ const App = () => {
             </button>
             {showWidget && (
               <div className="absolute right-4 bottom-10 ">
-                <Layout setShowWidget={setShowWidget} />
+                <Layout
+                  setShowWidget={setShowWidget}
+                  showPage={showPage}
+                  setShowPage={setShowPage}
+                />
               </div>
             )}
           </div>

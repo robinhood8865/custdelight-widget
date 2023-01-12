@@ -11,7 +11,7 @@ const API_URL = SERVER_URL + "/airtableApi";
 const Register = ({ setShowPage }) => {
   const [show, setShow] = useState(false);
   const [agree, setAgree] = useState(false);
-  const { headerColor, buttonColor } = useSelector((state) => state.theme);
+  const { buttonColor } = useSelector((state) => state.theme);
 
   const handleRegister = (event) => {
     event.preventDefault();
